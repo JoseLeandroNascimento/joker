@@ -12,6 +12,10 @@
         <item name="android:statusBarColor" tools:targetApi="1">?attr/colorPrimaryVariant</item>
 
     </style>
+    
+    <style name="Theme.JokerAppDev.AppbarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="Theme.JokerAppDev.popupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
+    
     <style name="Theme.Joker" parent="Base.Theme.Joker" />
 </resources>
