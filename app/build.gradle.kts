@@ -43,6 +43,9 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     testImplementation(libs.junit)
+
+    implementation("com.github.lisawray.groupie:groupie:2.10.1")
+
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
     androidTestImplementation(libs.androidx.junit)
