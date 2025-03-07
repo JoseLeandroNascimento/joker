@@ -43,6 +43,7 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     testImplementation(libs.junit)
+    implementation("androidx.core:core-splashscreen:1.0.1")
 
     implementation("com.github.lisawray.groupie:groupie:2.10.1")
 
