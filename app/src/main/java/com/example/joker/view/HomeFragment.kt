@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.joker.R
+import com.example.joker.data.CategoryRemoteDataSource
+import com.example.joker.model.Category
 import com.example.joker.presentation.HomePresenter
 import com.xwray.groupie.GroupieAdapter
 
@@ -21,7 +23,8 @@ class HomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        presenter = HomePresenter(this)
+        val dataSource = CategoryRemoteDataSource()
+        presenter = HomePresenter(this,dataSource)
     }
 
     override fun onCreateView(
@@ -54,8 +57,10 @@ class HomeFragment : Fragment() {
 
     }
 
-    fun showCategories(categories:List<CategoryItem>){
-        adapter.addAll(categories)
+    fun showCategories(categories:List<Category>){
+        adapter.addAll(categories.map {
+            CategoryItem(it)
+        })
         adapter.notifyDataSetChanged()
 
     }
