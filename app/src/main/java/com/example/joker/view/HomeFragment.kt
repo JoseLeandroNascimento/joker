@@ -57,6 +57,10 @@ class HomeFragment : Fragment() {
 
     }
 
+    fun onError(message:String){
+
+    }
+
     fun showCategories(categories:List<Category>){
         adapter.addAll(categories.map {
             CategoryItem(it)

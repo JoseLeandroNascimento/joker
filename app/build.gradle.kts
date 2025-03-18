@@ -44,8 +44,12 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     testImplementation(libs.junit)
     implementation("androidx.core:core-splashscreen:1.0.1")
-
     implementation("com.github.lisawray.groupie:groupie:2.10.1")
+    implementation ("com.squareup.retrofit2:retrofit:2.8.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.8.0")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+
+
 
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)

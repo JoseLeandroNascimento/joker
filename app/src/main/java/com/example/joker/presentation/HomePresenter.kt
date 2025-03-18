@@ -1,5 +1,6 @@
 package com.example.joker.presentation
 
+import android.widget.Toast
 import com.example.joker.data.CategoryRemoteDataSource
 import com.example.joker.data.ListCategoryCallback
 import com.example.joker.model.Category
@@ -24,6 +25,8 @@ class HomePresenter(
     }
 
     override fun onError(message:String){
+
+
 
     }
 

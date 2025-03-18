@@ -1,23 +1,39 @@
 package com.example.joker.data
 
-import android.os.Handler
-import android.os.Looper
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class CategoryRemoteDataSource {
 
-    fun findAllCategories(callback:ListCategoryCallback){
-        Handler(Looper.getMainLooper()).postDelayed({
-            val response = arrayListOf(
-                "Category 1",
-                "Category 2",
-                "Category 3",
-                "Category 4"
-            )
+    fun findAllCategories(callback: ListCategoryCallback) {
+        HttpClient.retrofit()
+            .create(ChuckNorrisApi::class.java)
+            .finAllCategories(HttpClient.API_KEY)
+            .enqueue(object : Callback<List<String>>{
 
-            callback.onSuccess(response)
-            callback.onComplete()
+                override fun onResponse(
+                    call: Call<List<String>>,
+                    response: Response<List<String>>
+                ) {
 
-        }, 2000)
+                    if(response.isSuccessful){
+                        val obj = response.body()
+                        callback.onSuccess(obj ?: emptyList())
+                        callback.onComplete()
+                    }else{
+                        val error = response.errorBody()?.toString()
+                        callback.onError(error ?: "Erro desconhecido")
+                    }
+                }
+
+                override fun onFailure(call: Call<List<String>>, t: Throwable) {
+                    callback.onError(t.message ?: "Error Interno")
+                    callback.onComplete()
+                }
+
+            })
+            
     }
 
 }
