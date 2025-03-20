@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.joker.R
@@ -16,15 +17,15 @@ import com.xwray.groupie.GroupieAdapter
 
 class HomeFragment : Fragment() {
 
-    private lateinit var presenter:HomePresenter
-    private lateinit var adapter:GroupieAdapter
+    private lateinit var presenter: HomePresenter
+    private val adapter = GroupieAdapter()
     private lateinit var progress: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val dataSource = CategoryRemoteDataSource()
-        presenter = HomePresenter(this,dataSource)
+        presenter = HomePresenter(this, dataSource)
     }
 
     override fun onCreateView(
@@ -35,33 +36,46 @@ class HomeFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
-    fun showProgress(){
+    fun showProgress() {
         progress.visibility = View.VISIBLE
     }
 
-    fun hideProgress(){
+    fun hideProgress() {
         progress.visibility = View.GONE
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         val rvMain = view.findViewById<RecyclerView>(R.id.rv_main)
         rvMain.layoutManager = LinearLayoutManager(requireContext())
         progress = view.findViewById(R.id.progress_bar)
 
-        presenter.findAllCategories()
+        if (adapter.itemCount == 0) {
+            presenter.findAllCategories()
+        }
 
-        adapter = GroupieAdapter()
+
         rvMain.adapter = adapter
 
+        adapter.setOnItemClickListener { item, view ->
+
+            val bundle = Bundle()
+            val categoryName = (item as CategoryItem).category.name
+
+            bundle.putString(JokerFragment.CATEGORY_KEY, categoryName)
+
+            findNavController().navigate(R.id.action_nav_home_to_nav_joker, bundle)
+        }
+
     }
 
-    fun onError(message:String){
+    fun onError(message: String) {
 
     }
 
-    fun showCategories(categories:List<Category>){
+    fun showCategories(categories: List<Category>) {
         adapter.addAll(categories.map {
             CategoryItem(it)
         })

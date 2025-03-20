@@ -9,7 +9,7 @@ import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
 
 
-class CategoryItem(private val category: Category) : Item<CategoryItem.CategoryViewHolder>() {
+class CategoryItem( val category: Category) : Item<CategoryItem.CategoryViewHolder>() {
 
     override fun createViewHolder(itemView: View): CategoryViewHolder {
         return CategoryViewHolder(itemView)
